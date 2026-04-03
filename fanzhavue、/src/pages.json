@@ -1,0 +1,105 @@
+{
+	"pages": [{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/index",
+			"style": {
+				"navigationBarTitleText": "工具",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/assistant/index",
+			"style": {
+				"navigationBarTitleText": "语音助手",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/knowledge/index",
+			"style": {
+				"navigationBarTitleText": "知识库",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/knowledge/detail/index",
+			"style": {
+				"navigationBarTitleText": "知识详情",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/profile/index",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/settings/index",
+			"style": {
+				"navigationBarTitleText": "系统设置"
+			}
+		},
+		{
+			"path": "pages/detect/index",
+			"style": {
+				"navigationBarTitleText": "反诈检测"
+			}
+		},
+		{
+			"path": "pages/report/index",
+			"style": {
+				"navigationBarTitleText": "报告中心"
+			}
+		}
+	],
+	"tabBar": {
+		"color": "#8a8f99",
+		"selectedColor": "#2f80ff",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "static/首页 (1).png",
+				"selectedIconPath": "static/首页tarbar点击.png"
+			},
+			{
+				"pagePath": "pages/tools/index",
+				"text": "工具",
+				"iconPath": "static/工具 (1).png",
+				"selectedIconPath": "static/工具tarbar点击.png"
+			},
+			{
+				"pagePath": "pages/assistant/index",
+				"text": "语音助手",
+				"iconPath": "static/语音助手 (1).png",
+				"selectedIconPath": "static/语音助手tarbar点击.png"
+			},
+			{
+				"pagePath": "pages/knowledge/index",
+				"text": "知识库",
+				"iconPath": "static/知识库 (1).png",
+				"selectedIconPath": "static/知识库tarbar点击.png"
+			},
+			{
+				"pagePath": "pages/profile/index",
+				"text": "我的",
+				"iconPath": "static/我的 (1).png",
+				"selectedIconPath": "static/我的tarbar点击.png"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarBackgroundColor": "#f5f7fb",
+		"backgroundColor": "#f5f7fb"
+	}
+}

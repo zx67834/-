@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API 测试</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .result { margin: 10px 0; padding: 10px; border: 1px solid #ddd; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+    </style>
+</head>
+<body>
+    <h1>API 测试</h1>
+    
+    <h2>健康检查</h2>
+    <button onclick="testHealth()">测试健康检查</button>
+    <div id="health-result" class="result"></div>
+    
+    <h2>聊天 API</h2>
+    <input type="text" id="message" value="你好，这是一个测试" style="width: 300px;" />
+    <button onclick="testChat()">测试聊天 API</button>
+    <div id="chat-result" class="result"></div>
+    
+    <script>
+        function testHealth() {
+            const resultDiv = document.getElementById('health-result');
+            resultDiv.innerHTML = '测试中...';
+            
+            fetch('http://localhost:7007/api/health')
+                .then(response => response.json())
+                .then(data => {
+                    resultDiv.innerHTML = JSON.stringify(data, null, 2);
+                    resultDiv.className = 'result success';
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = '错误: ' + error.message;
+                    resultDiv.className = 'result error';
+                });
+        }
+        
+        function testChat() {
+            const message = document.getElementById('message').value;
+            const resultDiv = document.getElementById('chat-result');
+            resultDiv.innerHTML = '测试中...';
+            
+            fetch('http://localhost:7007/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: message })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    resultDiv.innerHTML = JSON.stringify(data, null, 2);
+                    resultDiv.className = 'result success';
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = '错误: ' + error.message;
+                    resultDiv.className = 'result error';
+                });
+        }
+        
+        // 页面加载时自动测试健康检查
+        window.onload = testHealth;
+    </script>
+</body>
+</html>

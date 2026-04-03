@@ -239,8 +239,8 @@
           分析结果
         </v-card-title>
         <v-card-text>
-          <v-alert :type="analysisResult.severity === 'high' ? 'error' : 'warning'" class="mb-4">
-            <strong>风险等级: {{ analysisResult.severity === 'high' ? '高风险' : '中风险' }}</strong>
+          <v-alert :type="analysisResult.severity === 'high' ? 'error' : (analysisResult.severity === 'medium' ? 'warning' : 'success')" class="mb-4">
+            <strong>风险等级: {{ analysisResult.severity === 'high' ? '高风险' : (analysisResult.severity === 'medium' ? '中风险' : '低风险') }}</strong>
             <div>{{ analysisResult.message }}</div>
           </v-alert>
 

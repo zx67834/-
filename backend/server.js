@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 7007;
 
 // 配置 CORS，允许所有来源（开发环境）
 app.use(cors({
-  origin: 'http://localhost:8008',
+  origin: '*',
   credentials: false
 }));
 
