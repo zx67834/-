@@ -4,10 +4,22 @@ const multer = require('multer');
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
+const http = require('http');
+const { Server } = require('socket.io');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 7007;
+
+// 创建 HTTP 服务器用于 Socket.io
+const server = http.createServer(app);
+// 初始化 Socket.io，配置 CORS 允许前端来源
+const io = new Server(server, {
+  cors: {
+    origin: ['http://localhost:8008', 'http://localhost:8009', 'http://localhost:5173'],
+    methods: ['GET', 'POST']
+  }
+});
 
 // 配置 CORS，允许所有来源（开发环境）
 app.use(cors({
@@ -17,6 +29,46 @@ app.use(cors({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Socket.io 连接处理
+io.on('connection', (socket) => {
+  console.log('🔌 客户端已连接:', socket.id);
+
+  // 前端请求启动微信监听
+  socket.on('start-wechat', (data) => {
+    console.log('收到启动微信监听请求', data);
+    // 启动 Python 脚本等操作
+    // 暂时模拟成功
+    socket.emit('wechat-status', { connected: true, message: '微信监听已启动' });
+    // 模拟推送一条测试消息
+    setTimeout(() => {
+      socket.emit('wechat-message', {
+        id: Date.now(),
+        sender: '测试用户',
+        content: '这是一条测试微信消息',
+        time: new Date().toISOString(),
+        risk: 'low'
+      });
+    }, 1000);
+  });
+
+  // 前端请求停止微信监听
+  socket.on('stop-wechat', () => {
+    console.log('收到停止微信监听请求');
+    socket.emit('wechat-status', { connected: false, message: '微信监听已停止' });
+  });
+
+  // 前端发送预警处理结果（如忽略、干预）
+  socket.on('alert-action', (data) => {
+    console.log('预警处理动作:', data);
+    // 记录到数据库等
+  });
+
+  // 断开连接
+  socket.on('disconnect', () => {
+    console.log('客户端断开连接:', socket.id);
+  });
+});
 
 // 配置文件上传存储
 const upload = multer({
@@ -49,6 +101,43 @@ function containsSensitiveWords(text) {
     found: found.length > 0,
     words: found
   };
+}
+
+// 评估消息风险等级
+function evaluateRisk(text) {
+  const lowerText = text.toLowerCase();
+  let score = 0;
+  const detectedKeywords = [];
+  // 关键词匹配
+  const riskKeywords = [
+    { word: '转账', weight: 3 },
+    { word: '密码', weight: 2 },
+    { word: '验证码', weight: 3 },
+    { word: '投资', weight: 2 },
+    { word: '赚钱', weight: 2 },
+    { word: '兼职', weight: 2 },
+    { word: '刷单', weight: 3 },
+    { word: '红包', weight: 1 },
+    { word: '点击', weight: 1 },
+    { word: '链接', weight: 2 },
+    { word: '诈骗', weight: 4 },
+    { word: '赌博', weight: 4 },
+    { word: '色情', weight: 4 },
+    { word: '病毒', weight: 3 }
+  ];
+  for (const { word, weight } of riskKeywords) {
+    if (lowerText.includes(word)) {
+      score += weight;
+      detectedKeywords.push(word);
+    }
+  }
+  // 长度权重
+  if (text.length > 100) score += 1;
+  // 风险等级划分
+  let level = 'low';
+  if (score >= 8) level = 'high';
+  else if (score >= 4) level = 'medium';
+  return { level, score, detectedKeywords };
 }
 
 // 安全过滤中间件（用于智能助手问答和文本分析）
@@ -680,6 +769,37 @@ app.post('/api/knowledge/update', express.json(), (req, res) => {
   });
 });
 
+// 微信消息接收端点（供 Python 采集脚本调用）
+app.post('/api/wechat/message', express.json(), (req, res) => {
+  const message = req.body;
+  if (!message || !message.content) {
+    return res.status(400).json({ error: '无效的消息格式' });
+  }
+  console.log('收到微信消息:', message);
+  // 风险评估
+  const risk = evaluateRisk(message.content);
+  message.risk = risk.level;
+  message.riskScore = risk.score;
+  // 广播给所有连接的 Socket.io 客户端
+  io.emit('wechat-message', message);
+  // 如果是中高风险，触发预警
+  if (risk.level === 'medium' || risk.level === 'high') {
+    const alert = {
+      id: Date.now(),
+      title: `微信${risk.level === 'high' ? '高风险' : '中风险'}预警`,
+      description: `来自 ${message.sender || '未知'} 的消息：${message.content.substring(0, 50)}...`,
+      type: '微信诈骗',
+      source: '微信监控',
+      color: risk.level === 'high' ? 'error' : 'warning',
+      time: new Date(),
+      originalMessage: message
+    };
+    io.emit('alert', alert);
+    console.log('触发预警:', alert);
+  }
+  res.json({ success: true, risk });
+});
+
 // 提供上传文件的静态访问
 app.use('/uploads', express.static('uploads'));
 
@@ -690,11 +810,12 @@ app.use((err, req, res, next) => {
 });
 
 // 启动服务器
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`🚀 后端服务器运行在 http://localhost:${PORT}`);
   console.log(`📝 文本分析端点: POST http://localhost:${PORT}/api/analyze/text`);
   console.log(`🖼️  图片分析端点: POST http://localhost:${PORT}/api/analyze/image`);
   console.log(`🎵 音频分析端点: POST http://localhost:${PORT}/api/analyze/audio`);
   console.log(`📤 图片上传端点: POST http://localhost:${PORT}/api/upload/image`);
   console.log(`🎤 音频上传端点: POST http://localhost:${PORT}/api/upload/audio`);
+  console.log(`🔌 Socket.io 已就绪，监听端口 ${PORT}`);
 });

@@ -53,6 +53,32 @@ if errorlevel 1 (
     exit /b 1
 )
 
+REM 尝试启动微信采集脚本（可选）
+echo 🤖 检查微信采集脚本依赖...
+python --version >nul 2>nul
+if errorlevel 1 (
+    echo ⚠ 未检测到Python，跳过微信采集脚本。
+) else (
+    echo ✅ 检测到Python。
+    cd /d "%~dp0backend" 2>nul
+    if exist "wechat_collector.py" (
+        echo 📦 检查Python依赖（itchat-uos等）...
+        if exist "requirements.txt" (
+            echo 🔍 正在安装依赖（请耐心等待）...
+            pip install -r requirements.txt
+            if errorlevel 1 (
+                echo ⚠ Python依赖安装失败，微信采集可能无法工作。
+            ) else (
+                echo ✅ Python依赖安装成功。
+            )
+        )
+        echo  启动微信消息采集器（新窗口）...
+        start "微信采集器" cmd /k "python wechat_collector.py"
+    ) else (
+        echo ⚠ 未找到 wechat_collector.py，跳过微信采集。
+    )
+)
+
 REM 切换到前端目录
 echo 📂 切换到前端目录...
 cd /d "%~dp0frontend" 2>nul
