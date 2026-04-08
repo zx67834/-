@@ -4,53 +4,50 @@
 		<view class="status-holder"></view>
 		<view class="top-brand fade-up">
 			<view class="brand-left">
+				<view class="back-btn" @click="goBack">
+					<uni-icons type="back" size="24" color="#1f2a44"></uni-icons>
+				</view>
 				<view class="logo-dot">
 					<view class="logo-icon">🛡️</view>
 				</view>
 				<view>
-					<view class="brand-title">安全工具</view>
-					<view class="brand-sub">全方位守护您的财产安全</view>
+					<view class="brand-title">安全中心</view>
+					<view class="brand-sub">全面守护您的财产安全</view>
 				</view>
 			</view>
 			<view class="brand-right">
-				<view class="notification-badge">
-					<uni-icons type="notification" size="20" color="#617191"></uni-icons>
+				<view class="notification-badge" @click="refreshStatus">
+					<uni-icons type="refresh" size="20" color="#617191"></uni-icons>
 				</view>
 			</view>
 		</view>
 
-		<view class="quick-grid fade-up">
-			<view v-for="(card, index) in quickCards" :key="card.title" class="quick-card" :class="card.theme" hover-class="quick-card-hover"
-				@click="tapAction(card)">
-				<view class="card-icon">{{ card.icon }}</view>
-				<view class="quick-content">
-					<view class="quick-title">{{ card.title }}</view>
-					<view class="quick-sub">{{ card.desc }}</view>
-				</view>
-				<view class="card-arrow">
-					<uni-icons type="arrow-right" size="16" color="rgba(255,255,255,0.8)"></uni-icons>
-				</view>
+		<view class="safety-score fade-up">
+			<view class="score-circle">
+				<view class="score-value">{{ safetyScore }}<text class="score-unit">%</text></view>
+				<view class="score-label">安全指数</view>
 			</view>
+			<view class="score-desc">您的账户安全状态良好</view>
 		</view>
 
 		<view class="panel fade-up glass-card">
 			<view class="panel-head">
 				<view class="panel-title">
-				<uni-icons type="stats-bars" size="20" color="#2f64f5"></uni-icons>
-				安全数据统计
-			</view>
+					<uni-icons type="stats-bars" size="20" color="#2f64f5"></uni-icons>
+					安全数据统计
+				</view>
 			</view>
 			<view class="stats-row">
 				<view class="stat-card blue">
-					<view class="stat-label">预警总数</view>
+					<view class="stat-label">报告总数</view>
 					<view class="stat-num">{{ totalAlerts }}</view>
 				</view>
 				<view class="stat-card yellow">
-					<view class="stat-label">今日拦截</view>
+					<view class="stat-label">高风险报告</view>
 					<view class="stat-num">{{ todayBlocked }}</view>
 				</view>
 				<view class="stat-card green">
-					<view class="stat-label">安全指数</view>
+					<view class="stat-label">风险下降</view>
 					<view class="stat-num">{{ safetyScore }}%</view>
 				</view>
 			</view>
@@ -59,9 +56,60 @@
 		<view class="panel fade-up glass-card">
 			<view class="panel-head">
 				<view class="panel-title">
-				<uni-icons type="chatbubble" size="20" color="#2f64f5"></uni-icons>
-				最新安全动态
+					<uni-icons type="shield" size="20" color="#2f64f5"></uni-icons>
+					防护状态
+				</view>
 			</view>
+			<view class="status-list">
+				<view class="status-item">
+					<view class="status-icon">
+						<uni-icons type="checkmark" size="20" color="#22C55E"></uni-icons>
+					</view>
+					<view class="status-content">
+						<view class="status-name">账户保护</view>
+						<view class="status-desc">已开启双重认证</view>
+					</view>
+					<view class="status-dot online"></view>
+				</view>
+				<view class="status-item">
+					<view class="status-icon">
+						<uni-icons type="checkmark" size="20" color="#22C55E"></uni-icons>
+					</view>
+					<view class="status-content">
+						<view class="status-name">交易防护</view>
+						<view class="status-desc">实时监控异常交易</view>
+					</view>
+					<view class="status-dot online"></view>
+				</view>
+				<view class="status-item">
+					<view class="status-icon">
+						<uni-icons type="checkmark" size="20" color="#22C55E"></uni-icons>
+					</view>
+					<view class="status-content">
+						<view class="status-name">隐私保护</view>
+						<view class="status-desc">数据加密存储</view>
+					</view>
+					<view class="status-dot online"></view>
+				</view>
+				<view class="status-item">
+					<view class="status-icon">
+						<uni-icons type="alert" size="20" color="#F59E0B"></uni-icons>
+					</view>
+					<view class="status-content">
+						<view class="status-name">系统更新</view>
+						<view class="status-desc">有新版本可用</view>
+					</view>
+					<view class="status-dot warning"></view>
+				</view>
+			</view>
+		</view>
+
+		<view class="panel fade-up glass-card">
+			<view class="panel-head">
+				<view class="panel-title">
+					<uni-icons type="chatbubble" size="20" color="#2f64f5"></uni-icons>
+					最新安全动态
+				</view>
 				<text class="head-more" @click="viewAllAlerts">
 					查看全部
 					<uni-icons type="arrow-right" size="14" color="#8E95A8"></uni-icons>
@@ -82,36 +130,54 @@
 		</view>
 
 		<view class="panel fade-up glass-card">
-			<view class="panel-title">
-				<uni-icons type="settings" size="20" color="#2f64f5"></uni-icons>
-				快速设置
+			<view class="panel-head">
+				<view class="panel-title">
+					<uni-icons type="settings" size="20" color="#2f64f5"></uni-icons>
+					安全设置
+				</view>
 			</view>
 			<view class="setting-list">
-				<view class="setting-item" @click="openSetting('notification')">
+				<view class="setting-item" @click="toggleSetting('notification')">
 					<view class="setting-left">
 						<view class="setting-icon">
-						<uni-icons type="notification" size="20" color="#2f64f5"></uni-icons>
-					</view>
+							<uni-icons type="notification" size="20" color="#2f64f5"></uni-icons>
+						</view>
 						<view class="setting-text">
-							<view class="setting-name">推送通知</view>
-							<view class="setting-desc">实时接收安全预警</view>
+							<view class="setting-name">安全通知</view>
+							<view class="setting-desc">接收安全预警</view>
 						</view>
 					</view>
 					<view class="setting-switch">
-						<uni-icons type="checkmarkempty" size="20" color="#22C55E"></uni-icons>
+						<uni-icons :type="settings.notification ? 'checkmarkempty' : 'closeempty'" size="20" :color="settings.notification ? '#22C55E' : '#9CA3AF'"></uni-icons>
 					</view>
 				</view>
-				<view class="setting-item" @click="openSetting('family')">
+				<view class="setting-item" @click="toggleSetting('autoBlock')">
 					<view class="setting-left">
 						<view class="setting-icon">
-						<uni-icons type="person" size="20" color="#2f64f5"></uni-icons>
-					</view>
+							<uni-icons type="block" size="20" color="#2f64f5"></uni-icons>
+						</view>
 						<view class="setting-text">
-							<view class="setting-name">家庭守护</view>
-							<view class="setting-desc">已绑定3位家人</view>
+							<view class="setting-name">自动拦截</view>
+							<view class="setting-desc">拦截高风险来电</view>
 						</view>
 					</view>
-					<uni-icons type="right" size="16" color="#AAB3C7"></uni-icons>
+					<view class="setting-switch">
+						<uni-icons :type="settings.autoBlock ? 'checkmarkempty' : 'closeempty'" size="20" :color="settings.autoBlock ? '#22C55E' : '#9CA3AF'"></uni-icons>
+					</view>
+				</view>
+				<view class="setting-item" @click="toggleSetting('familyGuard')">
+					<view class="setting-left">
+						<view class="setting-icon">
+							<uni-icons type="person" size="20" color="#2f64f5"></uni-icons>
+						</view>
+						<view class="setting-text">
+							<view class="setting-name">家庭守护</view>
+							<view class="setting-desc">保护家人安全</view>
+						</view>
+					</view>
+					<view class="setting-switch">
+						<uni-icons :type="settings.familyGuard ? 'checkmarkempty' : 'closeempty'" size="20" :color="settings.familyGuard ? '#22C55E' : '#9CA3AF'"></uni-icons>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -122,38 +188,14 @@
 	export default {
 		data() {
 			return {
-				quickCards: [{
-						title: '安全中心',
-						desc: '查看安全防护状态',
-						theme: 'blue',
-						icon: '🛡️',
-						url: '/pages/security/index'
-					},
-					{
-						title: '预警中心',
-						desc: '查看最新安全预警',
-						theme: 'pink',
-						icon: '🔔',
-						url: '/pages/alerts/index'
-					},
-					{
-						title: '监护人管理',
-						desc: '管理家人安全守护',
-						theme: 'blue',
-						icon: '👨‍👩‍👧',
-						url: '/pages/guardian/index'
-					},
-					{
-						title: '反诈检测',
-						desc: '文字图片语音检测',
-						theme: 'pink',
-						icon: '🔍',
-						url: '/pages/detect/index'
-					}
-				],
+				safetyScore: 96,
 				totalAlerts: 128,
 				todayBlocked: 5,
-				safetyScore: 96,
+				settings: {
+					notification: true,
+					autoBlock: true,
+					familyGuard: true
+				},
 				recentAlerts: [
 					{
 						title: '检测到疑似诈骗电话',
@@ -177,28 +219,25 @@
 			}
 		},
 		methods: {
-			tapAction(card) {
-				if (card.url) {
-					uni.navigateTo({
-						url: card.url
-					})
-				} else {
-					uni.showToast({
-						title: `${card.title} 开发中`,
-						icon: 'none'
-					})
-				}
+			goBack() {
+				uni.navigateBack()
 			},
-			viewAllAlerts() {
+			refreshStatus() {
 				uni.showToast({
-					title: '查看全部预警',
+					title: '状态已刷新',
+					icon: 'success'
+				})
+			},
+			toggleSetting(key) {
+				this.settings[key] = !this.settings[key]
+				uni.showToast({
+					title: this.settings[key] ? '已开启' : '已关闭',
 					icon: 'none'
 				})
 			},
-			openSetting(type) {
-				uni.showToast({
-					title: `打开${type}设置`,
-					icon: 'none'
+			viewAllAlerts() {
+				uni.navigateTo({
+					url: '/pages/alerts/index'
 				})
 			}
 		}
@@ -240,6 +279,17 @@
 		display: flex;
 		align-items: center;
 		gap: 16rpx;
+	}
+
+	.back-btn {
+		width: 48rpx;
+		height: 48rpx;
+		border-radius: 14rpx;
+		background: #f5f7fb;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-right: 8rpx;
 	}
 
 	.logo-dot {
@@ -285,75 +335,45 @@
 		margin-top: 2rpx;
 	}
 
-	.quick-grid {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 24rpx;
+	.safety-score {
 		margin-top: 28rpx;
+		text-align: center;
 	}
 
-	.quick-card {
-		border-radius: 32rpx;
-		padding: 36rpx 32rpx;
-		color: #fff;
-		transition: transform 0.2s ease, box-shadow 0.2s ease;
-		box-shadow: 0 20rpx 40rpx rgba(0, 0, 0, 0.18);
-		position: relative;
-		overflow: hidden;
+	.score-circle {
+		width: 200rpx;
+		height: 200rpx;
+		border-radius: 50%;
+		background: linear-gradient(135deg, #4facfe, #00f2fe);
+		box-shadow: 0 20rpx 40rpx rgba(79, 172, 254, 0.3);
 		display: flex;
 		flex-direction: column;
-		gap: 16rpx;
-		min-height: 200rpx;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 16rpx;
+		color: #fff;
 	}
 
-	.card-icon {
-		font-size: 52rpx;
-		margin-bottom: 8rpx;
-	}
-
-	.quick-content {
-		flex: 1;
-	}
-
-	.card-arrow {
-		align-self: flex-end;
-		margin-top: auto;
-	}
-
-	.quick-card::before {
-		content: '';
-		position: absolute;
-		top: -50%;
-		left: -50%;
-		width: 200%;
-		height: 200%;
-		background: linear-gradient(45deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0) 60%);
-		transform: rotate(45deg);
-		transition: transform 0.6s ease;
-	}
-
-	.quick-card-hover {
-		transform: scale(0.97) translateY(-4rpx);
-		box-shadow: 0 20rpx 40rpx rgba(0, 0, 0, 0.2);
-	}
-
-	.quick-card.pink {
-		background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
-	}
-
-	.quick-card.blue {
-		background: linear-gradient(135deg, #4facfe, #00f2fe);
-	}
-
-	.quick-title {
-		font-size: 34rpx;
+	.score-value {
+		font-size: 60rpx;
 		font-weight: 700;
 	}
 
-	.quick-sub {
-		font-size: 25rpx;
-		margin-top: 8rpx;
+	.score-unit {
+		font-size: 32rpx;
+		font-weight: 500;
+		margin-left: 4rpx;
+	}
+
+	.score-label {
+		font-size: 24rpx;
 		opacity: 0.9;
+		margin-top: 8rpx;
+	}
+
+	.score-desc {
+		font-size: 26rpx;
+		color: #5f6880;
 	}
 
 	.panel {
@@ -366,6 +386,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		margin-bottom: 20rpx;
 	}
 
 	.panel-title {
@@ -386,7 +407,6 @@
 	}
 
 	.stats-row {
-		margin-top: 20rpx;
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 16rpx;
@@ -419,6 +439,65 @@
 		font-size: 40rpx;
 		font-weight: 700;
 		color: #1f2a44;
+	}
+
+	.status-list {
+		margin-top: 20rpx;
+	}
+
+	.status-item {
+		display: flex;
+		align-items: center;
+		padding: 20rpx 0;
+		border-bottom: 1px solid #f0f2f7;
+	}
+
+	.status-item:last-child {
+		border-bottom: 0;
+	}
+
+	.status-icon {
+		width: 52rpx;
+		height: 52rpx;
+		border-radius: 14rpx;
+		background: #f5f7fb;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-right: 16rpx;
+		flex-shrink: 0;
+	}
+
+	.status-content {
+		flex: 1;
+	}
+
+	.status-name {
+		font-size: 28rpx;
+		font-weight: 500;
+		color: #1f2a44;
+	}
+
+	.status-desc {
+		font-size: 22rpx;
+		color: #8f96a8;
+		margin-top: 4rpx;
+	}
+
+	.status-dot {
+		width: 12rpx;
+		height: 12rpx;
+		border-radius: 50%;
+		margin-left: 12rpx;
+		flex-shrink: 0;
+	}
+
+	.status-dot.online {
+		background: #22C55E;
+	}
+
+	.status-dot.warning {
+		background: #F59E0B;
 	}
 
 	.alert-list {
@@ -473,7 +552,7 @@
 	}
 
 	.setting-list {
-		margin-top: 16rpx;
+		margin-top: 20rpx;
 	}
 
 	.setting-item {

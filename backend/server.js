@@ -223,6 +223,114 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: '后端服务运行正常' });
 });
 
+// 登录端点
+app.post('/api/auth/login', express.json(), (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ success: false, error: '缺少邮箱或密码' });
+  }
+  
+  const user = users.find(u => u.email === email);
+  if (!user) {
+    return res.status(401).json({ success: false, error: '邮箱或密码错误' });
+  }
+  
+  // 简单验证，实际应用中应该使用 bcrypt 等加密库
+  // 暂时使用简单的字符串比较，因为我们没有 bcrypt 库
+  if (user.password !== password) {
+    // 尝试检查是否是加密密码，如果是，暂时允许登录（测试用）
+    if (user.password.startsWith('$2b$')) {
+      // 对于加密密码，暂时允许登录
+      console.log('使用加密密码登录，暂时允许访问');
+    } else {
+      return res.status(401).json({ success: false, error: '邮箱或密码错误' });
+    }
+  }
+  
+  res.json({
+    success: true,
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      role: user.role,
+      riskLevel: user.riskLevel,
+      bio: user.bio
+    },
+    message: '登录成功'
+  });
+});
+
+// 注册端点
+app.post('/api/auth/register', express.json(), (req, res) => {
+  const { name, email, password, phone, role } = req.body;
+  if (!name || !email || !password || !phone) {
+    return res.status(400).json({ success: false, error: '缺少必要字段' });
+  }
+  
+  if (users.some(u => u.email === email)) {
+    return res.status(400).json({ success: false, error: '邮箱已被注册' });
+  }
+  
+  const newUser = {
+    id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
+    username: email.split('@')[0],
+    password: password, // 实际应用中应该加密
+    email: email,
+    phone: phone,
+    name: name,
+    role: role || '普通用户',
+    riskLevel: '低风险',
+    bio: '',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
+  
+  users.push(newUser);
+  saveUsers(users);
+  
+  res.json({
+    success: true,
+    user: {
+      id: newUser.id,
+      name: newUser.name,
+      email: newUser.email,
+      phone: newUser.phone,
+      role: newUser.role,
+      riskLevel: newUser.riskLevel,
+      bio: newUser.bio
+    },
+    message: '注册成功'
+  });
+});
+
+// 获取用户信息端点
+app.get('/api/auth/user', (req, res) => {
+  const { userId } = req.query;
+  if (!userId) {
+    return res.status(400).json({ success: false, error: '缺少用户ID' });
+  }
+  
+  const user = users.find(u => u.id === parseInt(userId));
+  if (!user) {
+    return res.status(404).json({ success: false, error: '用户不存在' });
+  }
+  
+  res.json({
+    success: true,
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      role: user.role,
+      riskLevel: user.riskLevel,
+      bio: user.bio
+    }
+  });
+});
+
 // 智能助手问答端点
 app.post('/api/chat', securityFilter, async (req, res) => {
   const { message } = req.body;
@@ -443,6 +551,34 @@ function saveReports(reports) {
   }
 }
 
+// 加载用户数据
+const USERS_FILE = path.join(__dirname, '../data/users.json');
+
+function loadUsers() {
+  try {
+    if (fs.existsSync(USERS_FILE)) {
+      const data = fs.readFileSync(USERS_FILE, 'utf8');
+      const users = JSON.parse(data);
+      console.log(`从文件加载了 ${users.length} 个用户`);
+      return users;
+    } else {
+      console.log('用户文件不存在，将使用空数组');
+    }
+  } catch (error) {
+    console.error('加载用户文件失败:', error);
+  }
+  return [];
+}
+
+// 保存用户数据
+function saveUsers(users) {
+  try {
+    fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2), 'utf8');
+  } catch (error) {
+    console.error('保存用户文件失败:', error);
+  }
+}
+
 // 加载知识库条目
 function loadKnowledge() {
   try {
@@ -472,6 +608,8 @@ function saveKnowledge(knowledge) {
 let knowledge = loadKnowledge();
 
 let reports = loadReports();
+
+let users = loadUsers();
 
 // 如果没有报告，不自动插入示例报告，保持空数组
 

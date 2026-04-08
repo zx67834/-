@@ -43,6 +43,7 @@
 			</view>
 		</view>
 
+		<button class="logout-btn" @click="logout">登出账号</button>
 		<button class="save-btn" @click="save">保存系统设置</button>
 	</scroll-view>
 </template>
@@ -77,6 +78,27 @@
 					title: '设置已保存',
 					icon: 'success'
 				})
+			},
+			logout() {
+				uni.showModal({
+					title: '确认登出',
+					content: '确定要退出登录吗？',
+					confirmText: '确定',
+					cancelText: '取消',
+					success: (res) => {
+						if (res.confirm) {
+							// 清除登录状态
+							uni.setStorageSync('is_logged_in', false);
+							// 显示登出成功提示
+							uni.showToast({
+								title: '已退出登录',
+								icon: 'none'
+							});
+							// 返回到个人中心页面
+							uni.navigateBack();
+						}
+					}
+				});
 			}
 		},
 		onShow() {
@@ -158,14 +180,25 @@
 		color: #a0a6b8;
 	}
 
-	.save-btn {
-		margin-top: 12rpx;
-		height: 84rpx;
-		line-height: 84rpx;
-		background: linear-gradient(135deg, #3f8cff, #2877ff);
-		color: #fff;
-		border-radius: 18rpx;
-		font-size: 30rpx;
-	}
+	.logout-btn {
+			margin-top: 12rpx;
+			height: 84rpx;
+			line-height: 84rpx;
+			background: #fff;
+			color: #d25d5d;
+			border: 2rpx solid #f4cdcd;
+			border-radius: 18rpx;
+			font-size: 30rpx;
+		}
+
+		.save-btn {
+			margin-top: 12rpx;
+			height: 84rpx;
+			line-height: 84rpx;
+			background: linear-gradient(135deg, #3f8cff, #2877ff);
+			color: #fff;
+			border-radius: 18rpx;
+			font-size: 30rpx;
+		}
 </style>
 

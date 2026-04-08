@@ -76,9 +76,9 @@
       </v-col>
     </v-row>
 
-    <v-row>
+    <v-row class="align-stretch">
       <v-col cols="12" md="6">
-        <v-card>
+        <v-card class="h-100">
           <v-card-title>报告生成配置</v-card-title>
           <v-card-text>
             <v-select v-model="frequency" :items="frequencies" label="生成频率" variant="outlined"></v-select>
@@ -92,10 +92,10 @@
       </v-col>
 
       <v-col cols="12" md="6">
-        <v-card>
+        <v-card class="h-100">
           <v-card-title>报告预览</v-card-title>
           <v-card-text>
-            <v-card variant="outlined">
+            <v-card variant="outlined" class="h-100">
               <v-card-title class="text-body-1">《安全监测报告》样例</v-card-title>
               <v-card-text>
                 <p><strong>报告期：</strong>2025年3月1日 - 2025年3月31日</p>

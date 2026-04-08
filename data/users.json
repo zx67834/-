@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "username": "admin",
+    "password": "$2b$10$examplehashedpassword",
+    "email": "admin@example.com",
+    "phone": "13800138000",
+    "name": "管理员",
+    "role": "admin",
+    "riskLevel": "低风险",
+    "bio": "系统管理员",
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "username": "user1",
+    "password": "$2b$10$examplehashedpassword2",
+    "email": "user1@example.com",
+    "phone": "13900139000",
+    "name": "王小明",
+    "role": "普通用户",
+    "riskLevel": "中风险",
+    "bio": "关注网络安全，希望借助智能助手提升防诈能力。",
+    "createdAt": "2025-01-02T00:00:00.000Z",
+    "updatedAt": "2025-01-02T00:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "username": "123",
+    "password": "$2b$10$B9lnx68.VJyOmngqYYwyTOrQ.4QToooowtl1SqRCTwJrJKxQ4YOli",
+    "email": "123",
+    "phone": "123",
+    "name": "1234",
+    "role": "普通用户",
+    "riskLevel": "低风险",
+    "bio": "",
+    "createdAt": "2026-04-08T09:19:13.731Z",
+    "updatedAt": "2026-04-08T10:00:19.722Z"
+  },
+  {
+    "id": 4,
+    "username": "testuser2",
+    "password": "$2b$10$N.m6gFIZ49n/ckn7IG9YCu3H92pVoPGaL5eT7FDXQQZRU08WhH0Tm",
+    "email": "updated@example.com",
+    "phone": "13999999999",
+    "name": "Updated Name",
+    "role": "普通用户",
+    "riskLevel": "低风险",
+    "bio": "New bio",
+    "createdAt": "2026-04-08T09:21:09.380Z",
+    "updatedAt": "2026-04-08T10:00:40.799Z"
+  },
+  {
+    "id": 5,
+    "username": "test",
+    "password": "123456",
+    "email": "test@example.com",
+    "phone": "13888888888",
+    "name": "????",
+    "role": "????",
+    "riskLevel": "低风险",
+    "bio": "",
+    "createdAt": "2026-04-08T12:41:47.962Z",
+    "updatedAt": "2026-04-08T12:41:47.962Z"
+  },
+  {
+    "id": 6,
+    "username": "1234567891",
+    "password": "123456789",
+    "email": "1234567891@qq.com",
+    "phone": "15724986761",
+    "name": "dads",
+    "role": "普通用户",
+    "riskLevel": "低风险",
+    "bio": "",
+    "createdAt": "2026-04-08T12:42:39.473Z",
+    "updatedAt": "2026-04-08T12:42:39.473Z"
+  }
+]
