@@ -1,10 +1,18 @@
 <script>
+	import { applyMiniProgramBackground, applyTabBarStyleForIdentity } from '@/utils/themeGuardian.js'
+	import { pollGuardianHighRiskModals } from '@/utils/guardianRiskAlert.js'
+
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
+			applyMiniProgramBackground()
+			applyTabBarStyleForIdentity()
 		},
 		onShow: function() {
 			console.log('App Show')
+			applyMiniProgramBackground()
+			applyTabBarStyleForIdentity()
+			pollGuardianHighRiskModals()
 		},
 		onHide: function() {
 			console.log('App Hide')
@@ -21,6 +29,67 @@
 		background: radial-gradient(circle at top right, #eef4ff 0%, #f4f7fc 38%, #f6f8fc 100%);
 		font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 		color: #1f2a44;
+	}
+
+	/* 监护人账号：页面根节点加 class theme-guardian，整体偏红 */
+	.theme-guardian {
+		background: linear-gradient(180deg, #fff8f8 0%, #ffeeee 42%, #fce8ea 100%) !important;
+	}
+
+	.theme-guardian .glass-card {
+		border-color: rgba(198, 40, 40, 0.14);
+		box-shadow: 0 12rpx 28rpx rgba(90, 20, 30, 0.07);
+	}
+
+	.theme-guardian .brand-title,
+	.theme-guardian .title,
+	.theme-guardian .page-title,
+	.theme-guardian .panel-title {
+		color: #7f1d1d !important;
+	}
+
+	.theme-guardian .logo-dot,
+	.theme-guardian .icon-circle {
+		background: linear-gradient(145deg, #ef5350, #c62828) !important;
+		box-shadow: 0 12rpx 28rpx rgba(198, 40, 40, 0.35) !important;
+	}
+
+	.theme-guardian .detect-card {
+		background: linear-gradient(135deg, #e53935 0%, #b71c1c 100%) !important;
+		box-shadow: 0 16rpx 36rpx rgba(183, 28, 28, 0.35) !important;
+	}
+
+	.theme-guardian .login-btn,
+	.theme-guardian .confirm-btn,
+	.theme-guardian .save-btn,
+	.theme-guardian .analyze-btn,
+	.theme-guardian .send-btn,
+	.theme-guardian .submit,
+	.theme-guardian .dialog-btn.submit {
+		background: linear-gradient(135deg, #ef5350, #c62828) !important;
+		border-color: #c62828 !important;
+		color: #fff !important;
+	}
+
+	.theme-guardian .register-btn,
+	.theme-guardian .ghost-btn {
+		border-color: rgba(198, 40, 40, 0.35) !important;
+		color: #c62828 !important;
+	}
+
+	.theme-guardian .level,
+	.theme-guardian .safety-score .score-circle {
+		background: linear-gradient(135deg, #ff8a80, #e53935) !important;
+		color: #fff !important;
+	}
+
+	.theme-guardian .primary-btn {
+		color: #c62828 !important;
+		border-color: rgba(198, 40, 40, 0.45) !important;
+	}
+
+	.theme-guardian .bg-glow {
+		background: radial-gradient(circle, rgba(239, 83, 80, 0.22), rgba(239, 83, 80, 0)) !important;
 	}
 
 	:root {

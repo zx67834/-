@@ -1,5 +1,5 @@
 <template>
-	<view class="page">
+	<view class="page" :class="{ 'theme-guardian': isGuardianTheme }">
 		<view class="bg-glow"></view>
 		<view class="status-holder"></view>
 		<view class="hero">
@@ -8,6 +8,7 @@
 		</view>
 
 		<scroll-view class="chat-wrap" scroll-y>
+			<view v-if="!messages.length" class="chat-empty">暂无对话，输入内容或长按麦克风开始</view>
 			<view class="chat" :class="item.role" v-for="(item, idx) in messages" :key="idx">
 				<view class="bubble" :class="item.role === 'user' ? 'user-bubble' : 'ai-bubble'">
 					{{ item.text }}
@@ -20,7 +21,7 @@
 				<input class="text-input" v-model="text" placeholder="输入你的问题，例如：这个电话是不是诈骗？" confirm-type="send"
 					@confirm="sendText" />
 				<view class="mic-btn" @touchstart="startRecord" @touchend="stopRecord">
-					<uni-icons type="mic" size="20" color="#2f7dff"></uni-icons>
+					<uni-icons type="mic" size="20" :color="accentIconColor"></uni-icons>
 				</view>
 				<button class="send-btn" size="mini" @click="sendText">发送</button>
 			</view>
@@ -30,47 +31,75 @@
 </template>
 
 <script>
+	import { getApiBaseUrl } from '@/utils/apiBase.js'
+
 	export default {
 		data() {
 			return {
 				recording: false,
 				text: '',
-				messages: [{
-						role: 'user',
-						text: '我收到一个自称公安局的电话，是不是诈骗？'
-					},
-					{
-						role: 'ai',
-						text: '您好，这很可能是诈骗。公安机关不会通过电话办案，请勿转账或提供个人信息。'
-					}
-				]
+				messages: []
+			}
+		},
+		computed: {
+			accentIconColor() {
+				return this.isGuardianTheme ? '#c62828' : '#2f7dff'
 			}
 		},
 		onLoad() {
-			// 从本地存储加载聊天记录
-			const savedMessages = uni.getStorageSync('messages');
-			if (savedMessages) {
-				this.messages = savedMessages;
-			}
-		},
-		watch: {
-			messages: {
-				handler(newMessages) {
-					// 限制聊天记录数量，最多保存50条
-					if (newMessages.length > 50) {
-						newMessages = newMessages.slice(-50);
-					}
-					// 当聊天记录变化时保存到本地存储
-					try {
-						uni.setStorageSync('messages', newMessages);
-					} catch (e) {
-						console.error('保存聊天记录失败:', e);
-					}
-				},
-				depth: 2
+			try {
+				uni.removeStorageSync('messages')
+			} catch (e) {
+				/* 忽略 */
 			}
 		},
 		methods: {
+			parseResponseBody(data) {
+				if (data == null || data === '') return {}
+				if (typeof data === 'object' && !Array.isArray(data)) return data
+				if (typeof data === 'string') {
+					try {
+						return JSON.parse(data)
+					} catch (e) {
+						return {}
+					}
+				}
+				return {}
+			},
+			requestApi(path, options = {}) {
+				const baseUrl = getApiBaseUrl()
+				const urlPrimary = `${baseUrl}${path}`
+				const urlFallback = baseUrl.includes('127.0.0.1') ? urlPrimary.replace(/127\.0\.0\.1/g, 'localhost') : null
+				const run = (fullUrl) =>
+					new Promise((resolve, reject) => {
+						const reqOpts = { ...options, url: fullUrl }
+						const h = reqOpts.header || {}
+						const ct = String(h['Content-Type'] || h['content-type'] || '').toLowerCase()
+						if (
+							ct.includes('application/json') &&
+							reqOpts.data != null &&
+							typeof reqOpts.data === 'object' &&
+							!(reqOpts.data instanceof ArrayBuffer)
+						) {
+							reqOpts.data = JSON.stringify(reqOpts.data)
+						}
+						uni.request({
+							...reqOpts,
+							success: (raw) => {
+								resolve({
+									statusCode: raw?.statusCode,
+									data: this.parseResponseBody(raw?.data),
+									header: raw?.header || {}
+								})
+							},
+							fail: (err) => reject(err || new Error('request:fail'))
+						})
+					})
+				return run(urlPrimary).catch((primaryErr) => {
+					if (!urlFallback || urlFallback === urlPrimary) return Promise.reject(primaryErr)
+					return run(urlFallback).catch(() => Promise.reject(primaryErr))
+				})
+			},
 			startRecord() {
 				this.recording = true
 				uni.vibrateShort()
@@ -106,38 +135,40 @@
 				})
 				
 				// 调用后端 API
-				uni.request({
-					url: 'http://localhost:7007/api/chat',
+				this.requestApi('/api/chat', {
 					method: 'POST',
 					header: {
 						'Content-Type': 'application/json'
 					},
 					data: {
 						message: message
-					},
-					success: (res) => {
-						uni.hideLoading()
-						if (res.statusCode === 200 && res.data.success) {
-							this.messages.push({
-								role: 'ai',
-								text: res.data.reply
-							})
-						} else {
-							this.messages.push({
-								role: 'ai',
-								text: '抱歉，分析服务暂时不可用，请稍后再试。'
-							})
-							console.error('API 调用失败:', res.data.error || '未知错误')
-						}
-					},
-					fail: (err) => {
-						uni.hideLoading()
+					}
+				}).then((res) => {
+					uni.hideLoading()
+					const ok = res.statusCode === 200 || res.statusCode === '200' || Number(res.statusCode) === 200
+					if (ok && res.data?.success) {
 						this.messages.push({
 							role: 'ai',
-							text: '网络连接失败，请检查网络后重试。'
+							text: res.data.reply || '已收到消息'
 						})
-						console.error('网络请求失败:', err)
+						return
 					}
+					this.messages.push({
+						role: 'ai',
+						text: res.data?.error || '抱歉，分析服务暂时不可用，请稍后再试。'
+					})
+					console.error('API 调用失败:', res.statusCode, res.data)
+				}).catch((err) => {
+					uni.hideLoading()
+					const msg = String(err?.errMsg || err?.message || '')
+					const hint = /fail|timeout|abort|连接|网络/i.test(msg)
+						? '网络连接失败，请检查后端地址（系统设置的 API 地址）'
+						: '请求失败，请稍后重试'
+					this.messages.push({
+						role: 'ai',
+						text: hint
+					})
+					console.error('网络请求失败:', err)
 				})
 			}
 		}
@@ -182,6 +213,14 @@
 		flex: 1;
 		margin-top: 10rpx;
 		padding-bottom: 12rpx;
+	}
+
+	.chat-empty {
+		padding: 48rpx 24rpx;
+		text-align: center;
+		font-size: 26rpx;
+		color: #9ba3b8;
+		line-height: 1.5;
 	}
 
 	.mic {
@@ -327,5 +366,40 @@
 			opacity: 1;
 			transform: translateY(0);
 		}
+	}
+
+	/* 监护人端：与全局 theme-guardian、知识库页红系一致 */
+	.page.theme-guardian {
+		background: linear-gradient(180deg, #fff8f8 0%, #ffeeee 42%, #fce8ea 100%) !important;
+	}
+
+	.theme-guardian .bg-glow {
+		background: radial-gradient(circle, rgba(239, 83, 80, 0.22), rgba(239, 83, 80, 0)) !important;
+	}
+
+	.theme-guardian .mic {
+		background: linear-gradient(145deg, #ef5350, #c62828) !important;
+		box-shadow: 0 20rpx 40rpx rgba(198, 40, 40, 0.4) !important;
+	}
+
+	.theme-guardian .wave {
+		border-color: rgba(239, 83, 80, 0.35) !important;
+	}
+
+	.theme-guardian .user-bubble {
+		background: linear-gradient(140deg, #ef5350, #c62828) !important;
+	}
+
+	.theme-guardian .send-btn {
+		background: linear-gradient(135deg, #ef5350, #c62828) !important;
+	}
+
+	.theme-guardian .mic-btn {
+		background: #ffebee !important;
+		border-color: #ffcdd2 !important;
+	}
+
+	.theme-guardian .input-bar {
+		border-top-color: rgba(198, 40, 40, 0.18);
 	}
 </style>

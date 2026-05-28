@@ -1,17 +1,17 @@
 @echo off
+setlocal EnableExtensions
 chcp 65001 >nul
-setlocal
 
 echo ========================================
-echo  uni-app 微信小程序 - 安装依赖并启动编译
+echo  Anti-Fraud Mini Program - WeChat Dev
 echo ========================================
 echo.
 
 where node >nul 2>nul
 if errorlevel 1 (
-    echo [错误] 未检测到 Node.js，请安装 18+：https://nodejs.org/
-    pause
-    exit /b 1
+  echo [ERROR] Node.js was not found. Please install Node.js 18+.
+  pause
+  exit /b 1
 )
 
 cd /d "%~dp0"
@@ -20,34 +20,38 @@ set "USE_PM=npm"
 where pnpm >nul 2>nul
 if not errorlevel 1 set "USE_PM=pnpm"
 
-echo [1/3] 安装 / 同步依赖（%USE_PM%）...
+echo [1/3] Installing or syncing dependencies with %USE_PM%...
 call %USE_PM% install
 if errorlevel 1 (
-    echo [错误] 依赖安装失败。
+  echo [ERROR] Dependency install failed.
+  pause
+  exit /b 1
+)
+
+if exist "scripts\ensure-uni-modules.mjs" (
+  echo [2/3] Linking uni_modules...
+  set "LINK_UNI_MODULES_FORCE=1"
+  call node scripts\ensure-uni-modules.mjs
+  if errorlevel 1 (
+    echo [ERROR] uni_modules link failed.
     pause
     exit /b 1
+  )
+) else (
+  echo [2/3] scripts\ensure-uni-modules.mjs not found, skipping.
 )
-echo.
 
-echo [2/3] 链接 uni_modules（复制项目后必做，避免 @/uni_modules 找不到）...
-set "LINK_UNI_MODULES_FORCE=1"
-call node scripts\ensure-uni-modules.mjs
-echo.
-
-echo [3/3] 启动微信小程序开发编译（监听文件变化）...
-echo.
+echo [3/3] Starting WeChat mini program watcher...
 echo Output: %CD%\dist\dev\mp-weixin
-echo Open WeChat DevTools and import this folder.
-echo Stop watcher: press Ctrl+C in this window.
+echo Import that output folder in WeChat DevTools.
+echo Press Ctrl+C to stop.
 echo ----------------------------------------
-echo.
-
 call %USE_PM% run dev:mp-weixin
 if errorlevel 1 (
-    echo [错误] 启动失败，请查看上方日志。
-    pause
-    exit /b 1
+  echo [ERROR] WeChat mini program watcher failed.
+  pause
+  exit /b 1
 )
 
 pause
-endlocal
+exit /b 0

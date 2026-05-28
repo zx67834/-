@@ -1,0 +1,756 @@
+[
+  {
+    "id": 143,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "收到要求提供银行卡信息的短信或消息，可能存在电信诈骗风险。",
+    "risks": [
+      "请求提供银行卡信息"
+    ],
+    "handled": false,
+    "createdAt": "2026-05-26T11:10:05.000Z",
+    "updatedAt": "2026-05-26T11:10:05.000Z"
+  },
+  {
+    "id": 142,
+    "severity": "medium",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "通话中提到报销补充保障，并强调如果不确认可能会被收回，同时提到了免费福利和升级机会，可能存在诱导性质的推销活动。",
+    "risks": [
+      "模糊的紧迫感和威胁",
+      "提及免费福利并要求确认领取"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-20T08:31:35.000Z",
+    "updatedAt": "2026-04-20T08:31:35.000Z"
+  },
+  {
+    "id": 141,
+    "severity": "medium",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "对话内容涉及投资理财，并有诱导性质，可能存在电信诈骗风险。",
+    "risks": [
+      "存在营销诱导，劝说对方进行投资。",
+      "提到赚钱和稳赚不赔的收益，具有诱惑性。"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-20T06:40:19.000Z",
+    "updatedAt": "2026-04-20T06:40:19.000Z"
+  },
+  {
+    "id": 140,
+    "severity": "medium",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该文本可能存在电信诈骗风险，需谨慎对待。",
+    "risks": [
+      "提及银行卡异常可能涉及金融诈骗"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-20T04:51:09.000Z",
+    "updatedAt": "2026-04-20T04:51:09.000Z"
+  },
+  {
+    "id": 139,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该文本可能存在电信诈骗风险，需谨慎对待。",
+    "risks": [
+      "提及银行卡异常可能涉及金融诈骗"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-20T04:49:40.000Z",
+    "updatedAt": "2026-04-20T04:49:40.000Z"
+  },
+  {
+    "id": 138,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该文本涉及可能的虚假中奖诈骗风险。",
+    "risks": [
+      "提到中奖信息，可能存在虚假中奖诈骗"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-20T04:48:55.000Z",
+    "updatedAt": "2026-04-20T04:48:55.000Z"
+  },
+  {
+    "id": 137,
+    "severity": "high",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:53:25.000Z",
+    "updatedAt": "2026-04-19T05:53:25.000Z"
+  },
+  {
+    "id": 136,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该通话内容属于典型的营销推广电话，可能存在诱导消费者购买商品的风险。",
+    "risks": [
+      "营销诱导"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:51:44.000Z",
+    "updatedAt": "2026-04-19T05:51:44.000Z"
+  },
+  {
+    "id": 135,
+    "severity": "high",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:51:14.000Z",
+    "updatedAt": "2026-04-19T05:51:14.000Z"
+  },
+  {
+    "id": 134,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该通话内容属于典型的营销推广电话，可能存在诱导消费者购买商品的风险。",
+    "risks": [
+      "营销诱导"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:49:21.000Z",
+    "updatedAt": "2026-04-19T05:49:21.000Z"
+  },
+  {
+    "id": 133,
+    "severity": "high",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:48:47.000Z",
+    "updatedAt": "2026-04-19T05:48:47.000Z"
+  },
+  {
+    "id": 132,
+    "severity": "high",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:48:08.000Z",
+    "updatedAt": "2026-04-19T05:48:08.000Z"
+  },
+  {
+    "id": 131,
+    "severity": "high",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:44:18.000Z",
+    "updatedAt": "2026-04-19T05:44:18.000Z"
+  },
+  {
+    "id": 130,
+    "severity": "high",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:42:51.000Z",
+    "updatedAt": "2026-04-19T05:42:51.000Z"
+  },
+  {
+    "id": 129,
+    "severity": "high",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:26:03.000Z",
+    "updatedAt": "2026-04-19T05:26:03.000Z"
+  },
+  {
+    "id": 128,
+    "severity": "high",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:24:48.000Z",
+    "updatedAt": "2026-04-19T05:24:48.000Z"
+  },
+  {
+    "id": 127,
+    "severity": "high",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:23:41.000Z",
+    "updatedAt": "2026-04-19T05:23:41.000Z"
+  },
+  {
+    "id": 126,
+    "severity": "high",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:23:09.000Z",
+    "updatedAt": "2026-04-19T05:23:09.000Z"
+  },
+  {
+    "id": 125,
+    "severity": "high",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:22:38.000Z",
+    "updatedAt": "2026-04-19T05:22:38.000Z"
+  },
+  {
+    "id": 124,
+    "severity": "medium",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该通话内容属于典型的营销推广电话，可能存在诱导消费者购买商品的风险。",
+    "risks": [
+      "营销诱导"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:21:57.000Z",
+    "updatedAt": "2026-04-19T05:21:57.000Z"
+  },
+  {
+    "id": 123,
+    "severity": "medium",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该通话内容属于典型的营销推广电话，可能存在诱导消费者购买商品的风险。",
+    "risks": [
+      "营销诱导"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:20:24.000Z",
+    "updatedAt": "2026-04-19T05:20:24.000Z"
+  },
+  {
+    "id": 122,
+    "severity": "high",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:19:55.000Z",
+    "updatedAt": "2026-04-19T05:19:55.000Z"
+  },
+  {
+    "id": 121,
+    "severity": "medium",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该通话内容属于典型的营销推广电话，可能存在诱导消费者购买商品的风险。",
+    "risks": [
+      "营销诱导"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:18:58.000Z",
+    "updatedAt": "2026-04-19T05:18:58.000Z"
+  },
+  {
+    "id": 120,
+    "severity": "high",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:18:32.000Z",
+    "updatedAt": "2026-04-19T05:18:32.000Z"
+  },
+  {
+    "id": 119,
+    "severity": "high",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:17:54.000Z",
+    "updatedAt": "2026-04-19T05:17:54.000Z"
+  },
+  {
+    "id": 118,
+    "severity": "medium",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该通话内容属于典型的营销推广电话，可能存在诱导消费者购买商品的风险。",
+    "risks": [
+      "营销诱导"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:15:47.000Z",
+    "updatedAt": "2026-04-19T05:15:47.000Z"
+  },
+  {
+    "id": 117,
+    "severity": "medium",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该通话内容属于典型的营销推广电话，可能存在诱导消费者购买商品的风险。",
+    "risks": [
+      "营销诱导"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:14:04.000Z",
+    "updatedAt": "2026-04-19T05:14:04.000Z"
+  },
+  {
+    "id": 116,
+    "severity": "medium",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该通话内容属于典型的营销推广电话，可能存在诱导消费者购买商品的风险。",
+    "risks": [
+      "营销诱导"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:11:14.000Z",
+    "updatedAt": "2026-04-19T05:11:14.000Z"
+  },
+  {
+    "id": 115,
+    "severity": "high",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:10:13.000Z",
+    "updatedAt": "2026-04-19T05:10:13.000Z"
+  },
+  {
+    "id": 114,
+    "severity": "high",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-19T05:09:14.000Z",
+    "updatedAt": "2026-04-19T05:09:14.000Z"
+  },
+  {
+    "id": 113,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该通话内容属于典型的营销推广电话，可能存在诱导消费者购买商品的风险。",
+    "risks": [
+      "营销诱导"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-16T15:16:56.000Z",
+    "updatedAt": "2026-04-16T15:16:56.000Z"
+  },
+  {
+    "id": 112,
+    "severity": "high",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-16T15:02:46.000Z",
+    "updatedAt": "2026-04-16T15:02:46.000Z"
+  },
+  {
+    "id": 111,
+    "severity": "high",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-16T15:02:37.000Z",
+    "updatedAt": "2026-04-16T15:02:37.000Z"
+  },
+  {
+    "id": 110,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该通话内容属于典型的营销推广电话，可能存在诱导消费者购买商品的风险。",
+    "risks": [
+      "营销诱导"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-15T13:29:24.000Z",
+    "updatedAt": "2026-04-15T13:29:24.000Z"
+  },
+  {
+    "id": 109,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该通话内容属于典型的营销推广电话，可能存在诱导消费者购买商品的风险。",
+    "risks": [
+      "营销诱导"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-15T13:25:34.000Z",
+    "updatedAt": "2026-04-15T13:25:34.000Z"
+  },
+  {
+    "id": 108,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该文本涉及询问是否需要贷款，可能存在营销诱导的风险。",
+    "risks": [
+      "询问是否需要贷款"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-15T13:21:58.000Z",
+    "updatedAt": "2026-04-15T13:21:58.000Z"
+  },
+  {
+    "id": 107,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该通话涉及茅台酒的市场推广活动，可能存在营销诱导的风险。",
+    "risks": [
+      "营销诱导"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-15T13:21:26.000Z",
+    "updatedAt": "2026-04-15T13:21:26.000Z"
+  },
+  {
+    "id": 106,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该通话内容属于典型的营销推广电话，可能存在诱导消费者购买商品的风险。",
+    "risks": [
+      "营销诱导"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-15T13:19:29.000Z",
+    "updatedAt": "2026-04-15T13:19:29.000Z"
+  },
+  {
+    "id": 105,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "通话中提到报销补充保障，并强调如果不确认可能会被收回，同时提到了免费福利和升级机会，可能存在诱导性质的推销活动。",
+    "risks": [
+      "模糊的紧迫感和威胁",
+      "提及免费福利并要求确认领取"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-15T13:13:47.000Z",
+    "updatedAt": "2026-04-15T13:13:47.000Z"
+  },
+  {
+    "id": 104,
+    "severity": "high",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该文本涉及典型的电信诈骗行为，要求用户提供敏感信息以进行退款操作。",
+    "risks": [
+      "提及商品质检不合格并提出双倍退款",
+      "要求提供银行卡号和短信验证码"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-15T10:23:11.000Z",
+    "updatedAt": "2026-04-15T10:23:11.000Z"
+  },
+  {
+    "id": 103,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该文本可能存在电信诈骗风险，建议提高警惕。",
+    "risks": [
+      "使用了常见的中奖诱导语句"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-15T10:22:41.000Z",
+    "updatedAt": "2026-04-15T10:22:41.000Z"
+  },
+  {
+    "id": 102,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该文本可能存在电信诈骗风险，建议提高警惕。",
+    "risks": [
+      "使用了常见的中奖诱导语句"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-15T10:22:04.000Z",
+    "updatedAt": "2026-04-15T10:22:04.000Z"
+  },
+  {
+    "id": 101,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "音频内容解析异常，本次结果为保守评估",
+    "risks": [
+      "音频AI服务连接异常，未能完成完整语音识别"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-15T09:31:51.000Z",
+    "updatedAt": "2026-04-15T09:31:51.000Z"
+  },
+  {
+    "id": 100,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该通话内容属于典型的营销推广电话，可能存在诱导消费者购买商品的风险。",
+    "risks": [
+      "营销诱导"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-15T09:31:04.000Z",
+    "updatedAt": "2026-04-15T09:31:04.000Z"
+  },
+  {
+    "id": 99,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "图片分析完成，检测到中等风险特征",
+    "risks": [
+      "图片中包含可疑文字或二维码",
+      "视觉风格与已知诈骗宣传相似",
+      "图片来源不明"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-15T08:43:21.000Z",
+    "updatedAt": "2026-04-15T08:43:21.000Z"
+  },
+  {
+    "id": 98,
+    "severity": "high",
+    "userEmail": "1234567891@qq.com",
+    "userName": "赵括",
+    "summary": "文本直接要求提供银行卡号，属于高风险诈骗特征，需高度警惕并拒绝提供任何个人信息。",
+    "risks": [
+      "直接索要银行卡号，属于典型的敏感信息索取行为",
+      "无任何合理上下文或业务场景解释，属于异常请求",
+      "银行卡号是金融诈骗中常见的核心目标信息"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-15T07:59:00.000Z",
+    "updatedAt": "2026-04-15T07:59:00.000Z"
+  },
+  {
+    "id": 97,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该通话内容属于典型的营销推广电话，可能存在诱导消费者购买商品的风险。",
+    "risks": [
+      "营销诱导"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-15T07:17:10.000Z",
+    "updatedAt": "2026-04-15T07:17:10.000Z"
+  },
+  {
+    "id": 96,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该文本可能存在电信诈骗风险，需提高警惕。",
+    "risks": [
+      "提及银行卡异常可能涉及金融诈骗"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-15T07:17:01.000Z",
+    "updatedAt": "2026-04-15T07:17:01.000Z"
+  },
+  {
+    "id": 47,
+    "severity": "high",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该文本明确提及了冒充公检法进行诈骗的风险特征。",
+    "risks": [
+      "冒充公检法进行诈骗"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-13T12:44:55.000Z",
+    "updatedAt": "2026-04-13T12:44:55.000Z"
+  },
+  {
+    "id": 45,
+    "severity": "high",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该文本涉及典型的贷款诈骗行为，应提高警惕。",
+    "risks": [
+      "询问是否需要贷款并提供低利息诱饵"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-13T11:46:21.000Z",
+    "updatedAt": "2026-04-13T11:46:21.000Z"
+  },
+  {
+    "id": 44,
+    "severity": "high",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该文本涉及紧急转账和承诺立即还款的强烈诱因，具有明显的电信诈骗风险。",
+    "risks": [
+      "请求紧急转账",
+      "承诺立即还款"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-13T11:39:31.000Z",
+    "updatedAt": "2026-04-13T11:39:31.000Z"
+  },
+  {
+    "id": 33,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "对话内容显示可能存在营销诱导，需警惕潜在的金融诈骗风险。",
+    "risks": [
+      "存在营销诱导，提到充值和增加额度。",
+      "涉及金钱交易，虽然没有具体提及转账，但有充值行为。"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-10T13:08:14.000Z",
+    "updatedAt": "2026-04-10T13:08:14.000Z"
+  },
+  {
+    "id": 26,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该文本可能存在电信诈骗风险，需谨慎对待。",
+    "risks": [
+      "提及银行卡异常可能涉及金融诈骗"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-10T06:37:26.000Z",
+    "updatedAt": "2026-04-10T06:37:26.000Z"
+  },
+  {
+    "id": 25,
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该文本涉及可能的虚假中奖诈骗风险。",
+    "risks": [
+      "提到中奖信息，可能存在虚假中奖诈骗"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-10T06:37:08.000Z",
+    "updatedAt": "2026-04-10T06:37:08.000Z"
+  },
+  {
+    "id": 3,
+    "severity": "high",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "该问候语存在潜在的电信诈骗风险，需谨慎对待。",
+    "risks": [
+      "简短且缺乏具体信息的问候语可能隐藏欺诈意图"
+    ],
+    "handled": false,
+    "createdAt": "2026-04-10T04:39:00.000Z",
+    "updatedAt": "2026-04-10T04:39:00.000Z"
+  },
+  {
+    "severity": "medium",
+    "userEmail": "1231231231@qq.com",
+    "userName": "ni",
+    "summary": "图片分析服务暂时不可用",
+    "risks": [
+      "服务连接异常"
+    ],
+    "createdAt": "2026-05-26T14:16:20.127Z",
+    "id": 144
+  }
+]

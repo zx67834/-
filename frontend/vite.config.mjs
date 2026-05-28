@@ -49,5 +49,15 @@ export default defineConfig({
   },
   server: {
     port: 8008,
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:7007',
+        changeOrigin: true,
+      },
+      '/uploads': {
+        target: 'http://127.0.0.1:7007',
+        changeOrigin: true,
+      },
+    },
   },
 })

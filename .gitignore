@@ -4,8 +4,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# 环境变量
+# 环境变量与密钥
 .env
+.env.*
+!.env.example
+backend/.env
+backend/.env.local
 .env.local
 .env.development.local
 .env.test.local
@@ -15,13 +19,29 @@ yarn-error.log*
 dist/
 build/
 out/
+**/dist/
+fanzhavue、/dist/
 
-# 上传文件
+# 上传文件与用户敏感数据
 backend/uploads/
+uploads/
+data/users.json
+data/guardian-links.json
+
+# 大体积二进制 / 测试素材
+ffmpeg.exe
+backend/ffmpeg.exe
+backend/test-audio.wav
+
+# 大视频（超过 GitHub 100MB 限制，保留在本地即可）
+data/video/
+frontend/public/*.mp4
 
 # 日志
 logs
 *.log
+backend-dev.err.log
+backend-dev.out.log
 
 # 编辑器
 .vscode/

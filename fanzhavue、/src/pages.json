@@ -56,7 +56,34 @@
 		{
 			"path": "pages/report/index",
 			"style": {
-				"navigationBarTitleText": "报告中心"
+				"navigationBarTitleText": "安全中心"
+			}
+		},
+		{
+			"path": "pages/report/detail",
+			"style": {
+				"navigationBarTitleText": "报告详情"
+			}
+		},
+		{
+			"path": "pages/security/index",
+			"style": {
+				"navigationBarTitleText": "安全中心",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/alerts/index",
+			"style": {
+				"navigationBarTitleText": "预警中心",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/guardian/index",
+			"style": {
+				"navigationBarTitleText": "监护人管理",
+				"navigationStyle": "custom"
 			}
 		}
 	],

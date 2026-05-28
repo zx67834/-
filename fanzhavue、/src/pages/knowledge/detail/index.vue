@@ -1,5 +1,5 @@
 <template>
-	<view class="page">
+	<view class="page" :class="{ 'theme-guardian': isGuardianTheme }">
 		<view class="bg-glow"></view>
 		<view class="header">
 			<view class="back-btn" @click="goBack">
@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import { getApiBaseUrl } from '@/utils/apiBase.js'
+
 export default {
 	data() {
 		return {
@@ -61,7 +63,7 @@ export default {
 		loadKnowledge() {
 			this.loading = true
 			uni.request({
-				url: `http://localhost:7007/api/knowledge/${this.id}`,
+				url: `${getApiBaseUrl()}/api/knowledge/${this.id}`,
 				method: 'GET',
 				success: (res) => {
 					this.loading = false
